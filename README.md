@@ -74,3 +74,7 @@ Produce clean, leak-free, and norm-compliant C code.
 Author: Mohammad Alhindi
 Project: ft(42)_Pipex
 ```
+───────────────────────────────
+© 2025 Mohammad Alhindi — All Rights Reserved  
+Reusing or copying this code without permission is not cool — be original.
+───────────────────────────────
