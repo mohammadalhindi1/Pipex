@@ -6,14 +6,14 @@
 #    By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/03 20:38:42 by malhendi          #+#    #+#              #
-#    Updated: 2025/11/03 20:38:45 by malhendi         ###   ########.fr        #
+#    Updated: 2025/11/16 04:04:01 by malhendi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME     = pipex
 
 CC       = cc
-CFLAGS   = -Wall -Wextra -Werror -Iincludes -Iincludes/libft/includes
+CFLAGS   = -Wall -Wextra -Werror -Iincludes -Iincludes/libft/includes -g
 
 SRCDIR  = srcs
 OBJ_DIR = obj
@@ -27,9 +27,12 @@ RESET   = \033[0m
 RM      = rm -rf
 
 SRCS_COMMON = \
+	cmd_utils.c \
 	main.c \
-	error.c \
-	process.c
+	path_utils.c \
+	utils.c \
+	exec_childs.c \
+	pipex.c
 
 SRCS = $(addprefix $(SRCDIR)/,$(SRCS_COMMON))
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJ_DIR)/%.o)
@@ -43,6 +46,10 @@ $(NAME): $(OBJS) $(libft)
 	@$(MAKE) -C $(LIBPATH)
 	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBPATH) -lft $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)Done ✔$(RESET)"
+
+#$(NAME): libft $(OBJS)
+#@$(CC) $(CFLAGS) $(OBJS) -L$(LIBPATH) -lft -o $(NAME)
+#echo "$(GREEN)Done ✔$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)

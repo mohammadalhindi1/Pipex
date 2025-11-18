@@ -6,7 +6,7 @@
 /*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 21:05:43 by malhendi          #+#    #+#             */
-/*   Updated: 2025/08/18 17:08:47 by malhendi         ###   ########.fr       */
+/*   Updated: 2025/11/16 03:40:59 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <stdint.h>
+# include "ft_printf.h"
+# include "get_next_line.h"
 
 /* is* */
 int		ft_isalpha(int c);

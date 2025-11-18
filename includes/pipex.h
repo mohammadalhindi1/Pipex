@@ -6,7 +6,7 @@
 /*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 23:13:25 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/09 03:09:32 by malhendi         ###   ########.fr       */
+/*   Updated: 2025/11/16 03:47:01 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,25 @@
 
 typedef struct s_pipex
 {
-	int		infile;
-	int		outfile;
-	int		pipefd[2];
-	pid_t	pid1;
-	pid_t	pid2;
+	char	*infile;
+	char	*outfile;
+	char	**cmd1;
+	char	**cmd2;
+	char	**paths;
+	char	**envp;
+
+	int		fd_in;
+	int		fd_out;
+	int		pipe_fd[2];
 }	t_pipex;
 
-void	error_msg(const char *msg);
-void	error_perror(const char *msg);
-int		run_pipex(t_pipex *px, char **argv, char **envp);
+/* function prototypes */
+void	free_2d(char **strings);
+void	exit_handle(t_pipex *px, char *msg, int flag);
+void	init_paths(t_pipex *px);
+char	*get_cmd_path(t_pipex *px, char **cmd);
+void	first_child(t_pipex *px);
+void	second_child(t_pipex *px);
+void	pipex_run(t_pipex *px);
 
 #endif
