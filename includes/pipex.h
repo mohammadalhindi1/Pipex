@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: malhendi@student.42amman.com <malhendi>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 23:13:25 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/18 21:44:28 by malhendi         ###   ########.fr       */
+/*   Updated: 2025/11/19 08:22:55 by malhendi@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,18 @@ typedef struct s_pipex
 {
 	char	*infile;
 	char	*outfile;
-	char	**cmd1;
-	char	**cmd2;
+	char	***cmds;
+	int		cmd_count;
+
 	char	**paths;
 	char	**envp;
 
 	int		fd_in;
 	int		fd_out;
 	int		pipe_fd[2];
+	int		prev_fd;
 }	t_pipex;
+
 
 /* function prototypes */
 void	free_2d(char **strings);
