@@ -6,7 +6,7 @@
 /*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 03:30:00 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/19 03:30:00 by malhendi         ###   ########.fr       */
+/*   Updated: 2025/11/18 21:40:25 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	exit_handle(t_pipex *px, char *msg, int flag)
 		free_2d(px->cmd1);
 	if (px->cmd2)
 		free_2d(px->cmd2);
+	if (px->paths)
+		free_2d(px->paths);
 	ft_printf(msg);
 	exit(flag);
 }

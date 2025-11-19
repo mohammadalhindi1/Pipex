@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/18 21:40:31 by malhendi          #+#    #+#             */
+/*   Updated: 2025/11/18 21:40:32 by malhendi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 static char	*join_path_cmd(char *dir, char *cmd)
@@ -20,7 +32,6 @@ char	*get_cmd_path(t_pipex *px, char **cmd)
 
 	if (!cmd || !cmd[0])
 		return (NULL);
-
 	if (ft_strchr(cmd[0], '/'))
 	{
 		if (access(cmd[0], X_OK) == 0)
