@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malhendi@student.42amman.com <malhendi>    +#+  +:+       +#+        */
+/*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 03:30:00 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/19 07:59:12 by malhendi@st      ###   ########.fr       */
+/*   Updated: 2025/11/19 21:14:10 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,29 @@ void	free_2d(char **strings)
 	free(strings);
 }
 
+static void	free_cmds(t_pipex *px)
+{
+	int	i;
+
+	if (!px->cmds)
+		return ;
+	i = 0;
+	while (i < px->cmd_count)
+	{
+		if (px->cmds[i])
+			free_2d(px->cmds[i]);
+		i++;
+	}
+	free(px->cmds);
+	px->cmds = NULL;
+}
+
 static void	cleanup_pipex(t_pipex *px)
 {
 	if (!px)
 		return ;
-	if (px->cmd1)
-	{
-		free_2d(px->cmd1);
-		px->cmd1 = NULL;
-	}
-	if (px->cmd2)
-	{
-		free_2d(px->cmd2);
-		px->cmd2 = NULL;
-	}
+	if (px->cmds)
+		free_cmds(px);
 	if (px->paths)
 	{
 		free_2d(px->paths);

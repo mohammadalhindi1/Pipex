@@ -6,35 +6,58 @@
 /*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 03:55:00 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/18 21:40:42 by malhendi         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:16:27 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+static void	close_if_open(int *fd)
+{
+	if (*fd >= 0)
+	{
+		close(*fd);
+		*fd = -1;
+	}
+}
+
+static void	parent_after_fork(t_pipex *px, int i, int *prev_fd)
+{
+	if (*prev_fd >= 0 && *prev_fd != px->fd_in)
+		close_if_open(prev_fd);
+	if (i < px->cmd_count - 1)
+	{
+		close_if_open(&px->pipe_fd[1]);
+		*prev_fd = px->pipe_fd[0];
+	}
+	else
+	{
+		close_if_open(&px->pipe_fd[0]);
+		close_if_open(&px->fd_in);
+		close_if_open(&px->fd_out);
+	}
+}
+
 void	pipex_run(t_pipex *px)
 {
-	pid_t	pid1;
-	pid_t	pid2;
+	int		i;
+	int		prev_fd;
+	pid_t	pid;
 
-	if (pipe(px->pipe_fd) == -1)
-		exit_handle(px, "pipe error", 1);
-	pid1 = fork();
-	if (pid1 == -1)
-		exit_handle(px, "fork error", 1);
-	if (pid1 == 0)
-		first_child(px);
-	pid2 = fork();
-	if (pid2 == -1)
-		exit_handle(px, "fork error", 1);
-	if (pid2 == 0)
-		second_child(px);
-	close(px->pipe_fd[0]);
-	close(px->pipe_fd[1]);
-	if (px->fd_in >= 0)
-		close(px->fd_in);
-	if (px->fd_out >= 0)
-		close(px->fd_out);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
+	prev_fd = px->fd_in;
+	i = 0;
+	while (i < px->cmd_count)
+	{
+		if (i < px->cmd_count - 1 && pipe(px->pipe_fd) == -1)
+			exit_handle(px, "pipe error", 1);
+		pid = fork();
+		if (pid == -1)
+			exit_handle(px, "fork error", 1);
+		if (pid == 0)
+			exec_child(px, i, prev_fd);
+		parent_after_fork(px, i, &prev_fd);
+		i++;
+	}
+	while (wait(NULL) > 0)
+		;
 }

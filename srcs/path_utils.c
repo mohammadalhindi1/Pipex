@@ -6,7 +6,7 @@
 /*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:39:57 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/18 21:39:58 by malhendi         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:14:56 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	init_paths(t_pipex *px)
 
 	path_line = get_path_line(px->envp);
 	if (!path_line)
-		exit_handle(px, "Error: PATH not found in env\n", 1);
+		exit_handle(px, "Error: PATH not found in env", 1);
 	px->paths = ft_split(path_line, ':');
 	if (!px->paths)
-		exit_handle(px, "Error: malloc/ft_split failed\n", 1);
+		exit_handle(px, "Error: malloc/ft_split failed", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:40:31 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/18 21:40:32 by malhendi         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:15:46 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_cmd_path(t_pipex *px, char **cmd)
 	{
 		full = join_path_cmd(px->paths[i], cmd[0]);
 		if (!full)
-			exit_handle(px, "Error: malloc failed\n", 1);
+			exit_handle(px, "Error: malloc failed", 1);
 		if (access(full, X_OK) == 0)
 			return (full);
 		free(full);

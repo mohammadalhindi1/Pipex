@@ -6,7 +6,7 @@
 #    By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/03 20:38:42 by malhendi          #+#    #+#              #
-#    Updated: 2025/11/16 04:04:01 by malhendi         ###   ########.fr        #
+#    Updated: 2025/11/20 02:58:16 by malhendi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,10 @@ RM      = rm -rf
 
 SRCS_COMMON = \
 	cmd_utils.c \
+	exec_childs.c \
 	main.c \
 	path_utils.c \
 	utils.c \
-	exec_childs.c \
 	pipex.c
 
 SRCS = $(addprefix $(SRCDIR)/,$(SRCS_COMMON))
