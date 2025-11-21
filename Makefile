@@ -47,10 +47,6 @@ $(NAME): $(OBJS) $(libft)
 	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBPATH) -lft $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)Done ✔$(RESET)"
 
-#$(NAME): libft $(OBJS)
-#@$(CC) $(CFLAGS) $(OBJS) -L$(LIBPATH) -lft -o $(NAME)
-#echo "$(GREEN)Done ✔$(RESET)"
-
 $(OBJ_DIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
