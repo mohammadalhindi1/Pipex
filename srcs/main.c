@@ -6,36 +6,11 @@
 /*   By: malhendi@student.42amman.com <malhendi>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 03:29:19 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/23 04:32:02 by malhendi@st      ###   ########.fr       */
+/*   Updated: 2025/11/24 00:29:13 by malhendi@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-static void	open_infile(t_pipex *px)
-{
-	px->fd_in = open(px->infile, O_RDONLY);
-	if (px->fd_in < 0)
-	{
-		perror(px->infile);
-		px->fd_in = -1;
-	}
-}
-
-static void	open_outfile(t_pipex *px)
-{
-	if (px->is_heredoc)
-		px->fd_out = open(px->outfile,
-				O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else
-		px->fd_out = open(px->outfile,
-				O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (px->fd_out < 0)
-	{
-		perror(px->outfile);
-		exit_handle(px, "Error: cannot open outfile", 1);
-	}
-}
 
 static void	parse_normal(t_pipex *px, int argc, char **argv)
 {
