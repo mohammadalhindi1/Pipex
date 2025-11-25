@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malhendi@student.42amman.com <malhendi>    +#+  +:+       +#+        */
+/*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 02:57:38 by malhendi@st       #+#    #+#             */
-/*   Updated: 2025/11/23 02:57:38 by malhendi@st      ###   ########.fr       */
+/*   Updated: 2025/11/25 00:29:15 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	handle_heredoc(t_pipex *px)
 
 	if (pipe(hd) == -1)
 		exit_handle(px, "pipe error", 1);
-	while (read_line(buf, (int)sizeof(buf)))
+	while (read_line(buf, sizeof(buf)))
 	{
 		if (is_limiter(buf, px->limiter))
 			break ;

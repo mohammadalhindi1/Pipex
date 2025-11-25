@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malhendi@student.42amman.com <malhendi>    +#+  +:+       +#+        */
+/*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 03:55:00 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/24 00:29:33 by malhendi@st      ###   ########.fr       */
+/*   Updated: 2025/11/25 01:33:22 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void	pipex_run(t_pipex *px)
 		i++;
 	}
 	while (wait(NULL) > 0)
-		;
+	{
+	}
 }

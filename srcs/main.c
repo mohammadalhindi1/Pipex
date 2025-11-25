@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malhendi@student.42amman.com <malhendi>    +#+  +:+       +#+        */
+/*   By: malhendi <malhendi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 03:29:19 by malhendi          #+#    #+#             */
-/*   Updated: 2025/11/24 00:29:13 by malhendi@st      ###   ########.fr       */
+/*   Updated: 2025/11/25 00:31:06 by malhendi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,16 @@ static void	init_pipex(t_pipex *px, int argc, char **argv, char **envp)
 {
 	ft_bzero(px, sizeof(t_pipex));
 	if (argc < 5)
-		exit_handle(px,"Usage: ./pipex file1 cmd1 cmd2 ... cmdN file2", 1);
+		exit_handle(px,
+			"Usage: ./pipex file1 cmd1 cmd2 ... cmdN file2", 1);
 	px->envp = envp;
 	px->is_heredoc = 0;
 	px->limiter = NULL;
 	if (!ft_strncmp(argv[1], "here_doc", 8))
 	{
 		if (argc < 6)
-			exit_handle(px,"Usage: ./pipex here_doc LIMITER cmd cmd1 file", 1);
+			exit_handle(px,
+				"Usage: ./pipex here_doc LIMITER cmd cmd1 file", 1);
 		px->is_heredoc = 1;
 		px->limiter = argv[2];
 		px->outfile = argv[argc - 1];
