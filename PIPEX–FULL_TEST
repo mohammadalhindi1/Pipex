@@ -1,0 +1,107 @@
+###############################################
+# PIPEX – FULL TEST SUITE (MANDATORY + BONUS)
+###############################################
+
+# ========= 0) INITIAL SETUP =========
+rm -f infile outfile outfile2
+echo "hello" > infile
+echo "world" >> infile
+echo "pipex test" >> infile
+
+
+# ========= 1) BASIC TESTS =========
+
+# Test 1: cat | wc -l
+./pipex infile "cat" "wc -l" outfile
+< infile cat | wc -l > outfile2
+echo "--- diff Test 1 ---"
+diff outfile outfile2
+
+
+# Test 2: grep argument
+./pipex infile "grep o" "wc -l" outfile
+< infile grep o | wc -l > outfile2
+echo "--- diff Test 2 ---"
+diff outfile outfile2
+
+
+# Test 3: ls -l | wc -l
+./pipex infile "ls -l" "wc -l" outfile
+ls -l < infile | wc -l > outfile2
+echo "--- diff Test 3 ---"
+diff outfile outfile2
+
+
+# Test 4: multiple spaces inside command
+./pipex infile "grep   o" "wc   -l" outfile
+< infile grep o | wc -l > outfile2
+echo "--- diff Test 4 ---"
+diff outfile outfile2
+
+
+
+# ========= 2) BONUS: MULTIPLE PIPES =========
+
+# Test 5: grep → sort → wc
+./pipex infile "grep o" "sort" "wc -l" outfile
+< infile grep o | sort | wc -l > outfile2
+echo "--- diff Test 5 ---"
+diff outfile outfile2
+
+# Test 6: cat → grep → cut → wc
+./pipex infile "cat" "grep o" "cut -c 1-3" "wc -l" outfile
+< infile cat | grep o | cut -c 1-3 | wc -l > outfile2
+echo "--- diff Test 6 ---"
+diff outfile outfile2
+
+
+
+# ========= 3) HERE_DOC TESTS =========
+
+# Basic heredoc test
+printf "hello\nworld\nEOF\n" | ./pipex here_doc EOF "cat" "wc -l" outfile
+printf "hello\nworld\n" | cat | wc -l > outfile2
+echo "--- diff here_doc ---"
+diff outfile outfile2
+
+# heredoc with grep
+printf "a\nb\nc\nd\nSTOP\n" | ./pipex here_doc STOP "grep a" "wc -l" outfile
+printf "a\nb\nc\nd\n" | grep a | wc -l > outfile2
+echo "--- diff here_doc grep ---"
+diff outfile outfile2
+
+
+
+# ========= 4) ERROR HANDLING =========
+
+# Missing infile → should print error but not crash
+./pipex NOFILE "cat" "wc -l" outfile
+echo "Exit code: $?"
+
+# Outfile permission denied
+rm -f outfile
+touch outfile
+chmod 000 outfile
+./pipex infile "cat" "wc -l" outfile
+echo "Exit code (expected non-zero): $?"
+chmod 644 outfile
+
+
+# ========= 5) PATH / COMMAND NOT FOUND =========
+
+# Command not in PATH → exit 127
+./pipex infile "asdasd" "wc -l" outfile
+echo "Exit code should be 127 → $?"
+
+# Test with ./a.out (if exists)
+# ./pipex infile "./a.out" "wc -l" outfile
+
+
+
+# ========= 6) MEMORY LEAKS (OPTIONAL) =========
+valgrind --leak-check=full ./pipex infile "grep o" "wc -l" outfile
+
+###############################################
+# END OF TEST SUITE
+###############################################
+
