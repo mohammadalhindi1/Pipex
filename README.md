@@ -71,8 +71,12 @@ Understand how pipes, fork, and execve work together.
 
 Produce clean, leak-free, and norm-compliant C code.
 ```
-Author: Mohammad Alhindi
-Project: ft(42)_Pipex
+
+**Mohammad Alhindi**  
+Mohammad Alhendi || Cloud & DevOps
+
+- GitHub: https://github.com/mohammadalhindi1
+- LinkedIn: www.linkedin.com/in/mohammad-alhendi13
 ```
 ───────────────────────────────
 © 2025 Mohammad Alhindi — All Rights Reserved  
