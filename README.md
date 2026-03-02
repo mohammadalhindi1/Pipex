@@ -72,8 +72,7 @@ Understand how pipes, fork, and execve work together.
 Produce clean, leak-free, and norm-compliant C code.
 ```
 
-**Mohammad Alhindi**  
-Mohammad Alhendi || Cloud & DevOps
+**Mohammad Alhindi (malhendi)**
 
 - GitHub: https://github.com/mohammadalhindi1
 - LinkedIn: www.linkedin.com/in/mohammad-alhendi13
